@@ -297,7 +297,7 @@ display(' ');
 %% PLOTTING
 
 % set up some plotting variables
-yticksSlant         = [-6 -4 -2 0 2 4 6];
+yticksSlant = [-6 -4 -2 0 2 4 6];
 
 % y axis min and max for each row
 ymin1 =-12;  ymax1 = 3.5;
@@ -330,7 +330,6 @@ for dif = 1:3
         counter = counter + 1;
         
         eval(['s',num2str(counter),'= subplot(3,3,',num2str(counter),'); hold on;']);
-        
         
         %set parameters of plot
         if cond == 1 % perspective condition

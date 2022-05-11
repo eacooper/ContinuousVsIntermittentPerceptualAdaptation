@@ -3,7 +3,7 @@ close all;
 
 %% Calculations
 
-% calculate the difference scoresfor the shape condition
+% calculate the difference scores for the shape condition
 %continuous
 Shape_Dif_Start_Pre_Long  = squeeze(nanmean(Shape(:,2,long_inds)) - nanmean(Shape(:,1,long_inds))); % start minus pre
 Shape_Dif_End_Start_Long  = squeeze(nanmean(Shape(:,3,long_inds)) - nanmean(Shape(:,2,long_inds))); % end minus start
@@ -125,8 +125,8 @@ display(' ');
 
 %positions of corrners of the red shaded box
 x2  = ([0,15]); %x length of rectangle
-y4  = [0,0]; %bottom of rectangle
-y5  = [6,6]; %top of rectangle 
+y4  = [0,0];    % bottom of rectangle
+y5  = [6,6];    % top of rectangle 
 
 %yvalues for different rows
 ymin1 = -0.051; ymax1 = 0.02; 

@@ -6,8 +6,7 @@ close all;
 % the perspective condition is monocular (left eye). We assume that people
 % adjust the stimulus so that it looks fronto-parallel to the left
 % eye. The slant that would look fronto-parallel to the left is
-% equivalent to half the vergence angle. We subtract this bias from thier
-% perspective slant estimates
+% equivalent to half the vergence angle. We subtract this bias from their perspective slant estimates
 for Subj = 1:length(SubjIDs)
     
     halfipd = ipds(Subj)/2;
@@ -245,8 +244,6 @@ display(' ');
 display('both groups: Dual Adaptation vs aftereffect');
 display(['r = ' num2str(r(2),3),', p = ' num2str(p(2),4)]);
 display(' ');
-
-
 
 
 

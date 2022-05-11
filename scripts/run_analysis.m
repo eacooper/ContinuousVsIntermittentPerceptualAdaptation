@@ -25,14 +25,14 @@ MarkerSize3_small = MarkerSize3 * 0.4;
 ErLineWidth       = 1;
 fontsize          = 9;
 color_lightgray   = [0.75,0.75,0.75]; %color of raw data
-alphared            = 0.04; %transparency of the red rectangles
+alphared          = 0.04; %transparency of the red rectangles
 difstr            = {'Dif_Start_Pre','Dif_End_Start','Dif_Post_Pre'};
-groupstr          = {'Long','Short'};
+groupstr          = {'Long','Short'}; % Long = continuous, short = intermittent
 shapestr          = {'o','d'};
 condstr           = {'Persp','Disp','Dual'};
 colorstr2         = {'color_01','color_02','color_03'};
 
-% get indices for continuous and intermittent groups
+% get indices for continuous, intermittent, and control groups
 long_inds = find(strcmp(Group,'long'));
 short_inds = find(strcmp(Group,'short'));
 cont_inds = find(strcmp(Group,'control'));
@@ -44,7 +44,7 @@ plot_all_data;
 plot_fig5_example_participant;
 
 % Fig 6 and slant distortion stats
- plot_fig6_and_run_slant_stats;
+plot_fig6_and_run_slant_stats;
 
 % Fig 7 and weighting calcuation
 plot_fig7_and_run_weight_stats;
@@ -53,8 +53,7 @@ plot_fig7_and_run_weight_stats;
 plot_fig8_and_run_shape_stats;
 
 % Comparison with control group
-shape_control_group_stats
-
+shape_control_group_stats;
 
 % Exploratory analyses
 Exploratory_analyses;

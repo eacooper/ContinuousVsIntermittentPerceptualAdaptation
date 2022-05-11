@@ -19,7 +19,7 @@ for i = 1:length(SubjIDs)
     end
     
     %Perspective
-    subplot(2,2,1); hold on;
+    subplot(2,2,1); hold on; title('Perspective');
     plot(1:4,nanmean(Persp(:,:,i)),'-','color',color_01);
     hline = refline(0,0); hline.Color = 'k';
     set(gca,'xtick',[1:4],'xticklabel',{'Pre','Start','End','Post'});
@@ -27,7 +27,7 @@ for i = 1:length(SubjIDs)
     axis tight;
     
     %Disparity
-    subplot(2,2,2); hold on;
+    subplot(2,2,2); hold on; title('Disparity');
     plot(1:4,nanmean(Disp(:,:,i)),'color',color_02);
     hline = refline(0,0); hline.Color = 'k';
     set(gca,'xtick',[1:4],'xticklabel',{'Pre','Start','End','Post'});
@@ -35,7 +35,7 @@ for i = 1:length(SubjIDs)
     axis tight;
     
     %Dual Cue
-    subplot(2,2,3); hold on;
+    subplot(2,2,3); hold on; title('Dual Cue');
     plot(1:4,nanmean(Dual(:,:,i)),'color',color_03);
     hline = refline(0,0); hline.Color = 'k';
     set(gca,'xtick',[1:4],'xticklabel',{'Pre','Start','End','Post'});
@@ -43,7 +43,7 @@ for i = 1:length(SubjIDs)
     axis tight;
     
     %Rectangle Judgement
-    subplot(2,2,4); hold on;
+    subplot(2,2,4); hold on; title('Shape');
     plot(1:4,nanmean(Shape(:,:,i)),'color',color_04);
     hline = refline(0,1); hline.Color = 'k';
     set(gca,'xtick',[1:4],'xticklabel',{'Pre','Start','End','Post'});
@@ -59,7 +59,7 @@ for i = 1:length(SubjIDs)
     
 end
 
-% add in the average and standard deviation for each group
+% add in the average for each group
 
 for g = 1:3
     

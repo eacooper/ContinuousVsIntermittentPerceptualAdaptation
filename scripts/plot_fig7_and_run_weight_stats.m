@@ -1,10 +1,11 @@
 %This script plots figure 7 and calculates the disparity and perspective
-%weight. This script also includes some exploritory plots.
+%weight.
 
 close all;
 
 % use cue combination model to calculate the weight given to disparity at start
 % adapt and end adapt
+
 for Subj = 1:length(SubjIDs) % for each subject
     
     % calcuate the mean slant setting in the start and end adapt conditions
@@ -34,8 +35,7 @@ for Subj = 1:length(SubjIDs) % for each subject
     Wd_start(Subj)        = (Persp_Start_unb(Subj) - Dual_Start(Subj)) / (Persp_Start_unb(Subj) - Disp_Start(Subj));
     Wd_end(Subj)          = (Persp_End_unb(Subj) - Dual_End(Subj)) / (Persp_End_unb(Subj) - Disp_End(Subj));
     
-    %This is used to double check some of our assumptions. These values are
-    %not used in the paper.
+    %This is used to double check some of our assumptions. These values are not used in the paper.
     Persp_Pre(Subj)     = nanmean(Persp(:,1,Subj));
     Disp_Pre(Subj)      = nanmean(Disp(:,1,Subj));
     Dual_Pre(Subj)      = nanmean(Dual(:,1,Subj));
@@ -46,87 +46,6 @@ for Subj = 1:length(SubjIDs) % for each subject
     
     
 end
-
-% SANITY CHECK (1) 
-% we can double check our model of single cue bias described in the
-% appendix. we compared the perspective-only bias for each participant in 
-% the pre-test and the start of adaptation measurements. Since we do not 
-% expect any changes in slant estimates from perspective between these two 
-% measurements, we expected these values to be similar. We also performed 
-% this calculation for the disparity-only bias during the pre-test and the 
-% start of adaptation (subtracting out the contribution of the glasses for 
-% the start of adaptation measurement). These results uphold our
-% assumptions
-
-% differences between biases during the pre measurement and start
-% of adaptation measurement. we expect the differnece to be small
-Persp_change = mean(abs(Persp_Pre([long_inds short_inds]) - Persp_Start([long_inds short_inds])));
-Disp_change  = mean(abs(Disp_Pre([long_inds short_inds]) - (Disp_Start([long_inds short_inds]) + 9.83)));
-
-%correlation coeffecients between these biases 
-Persp_corr   = corrcoef(Persp_Pre([long_inds short_inds]),Persp_Start([long_inds short_inds]));
-Disp_corr    = corrcoef(Disp_Pre([long_inds short_inds]),Disp_Start([long_inds short_inds]) + 9.83);
-
-figure; hold on;
-
-subplot(2,2,1); hold on;
-plot(Persp_Pre,Persp_Start,'ko');
-title('Perspective-only task');
-ylabel('Start Adapt Slant Frontoparallel (deg)'); xlabel('Pre-test Slant Frontoparallel(deg)');
-axis equal; refline(1,0);
-axis([-14 6 -14 6]);
-
-subplot(2,2,2); hold on;
-title('Perspective-only - Compare pre & start slant biases');
-histogram(abs(Persp_Pre([long_inds short_inds]) - Persp_Start([long_inds short_inds])),50)
-xlabel('Difference in biases (deg)');
-
-
-subplot(2,2,3); hold on;
-plot(Disp_Pre,Disp_Start + 9.83,'ko');
-title('Disparity-only task');
-ylabel('Start Adapt Slant Bias (deg)'); xlabel('Pre-test Slant Bias (deg)');
-axis equal; refline(1,0);
-axis([-4 12 -4 12]);
-
-subplot(2,2,4); hold on;
-title('Disparity-only - Compare pre & start slant biases');
-histogram(abs(Disp_Pre([long_inds short_inds]) - (Disp_Start([long_inds short_inds]) + 9.83)),50)
-xlabel('Difference in biases (deg)');
-
-
-
-%SANITY CHECK (2)
-% equation A7 assumes that participants have accurately adjusted the dual
-% cue slant to appear frontoparallel at the start of adaptation. We can drop 
-% this assumption and recalculate the weights using the response to the dual
-% cue condition in the pretest condition. When we recalculate the weights,
-% they are relatively well-correlated with the original weight calculation 
-% (0.69), but the mean absolute difference is a bit high (0.19). we
-% attribute this to noise. Ultimetly we are intersted in a change in weights
-% from start to end of adaptation (Figure 7C), so if we assume that
-% participants ability is relatively stable then our current calculation is
-% approapriate
-Wd_change = mean(abs(Wd_start([long_inds short_inds]) - Wd_start_2([long_inds short_inds])));
-Wd_corr = corrcoef(Wd_start([long_inds short_inds]),Wd_start_2([long_inds short_inds]));
-
-figure; hold on;
-
-subplot(1,2,1); hold on;
-title('Comparison between two types of Wd calculation');
-histogram((Wd_start - Wd_start_2),50)
-xlabel('Difference in Wd');
-
-subplot(1,2,2); hold on;
-title('Weight calculation comparision');
-plot(Wd_start([long_inds short_inds]),Wd_start_2([long_inds short_inds]),'ko');
-xlabel('Wd in paper');
-ylabel('Wd caculated with dual cue in pretest');
-refline(1,0);
-
-
-
-
 
 
 %REMOVE PARTICIPANTS WHO DO NOT FIT THE MODEL
@@ -207,11 +126,7 @@ display(' ');
 %% Plotting
 
 % plotting set up
-MarkerSizeP = 8;
-
-%x values
 xcondticks  = [1 1.5];
-
 
 %Run function that makes the subplots close togeather
 make_it_tight = true;
@@ -232,7 +147,7 @@ for nplot = 1:subplotnum
         s1  = subplot(2,2,nplot); hold on;
         
         plot(xcondticks,[Wd_start(long_inds) ; Wd_end(long_inds)]','color',color_lightgray);
-        avg = plot(xcondticks,[Avg_Wd_start_Long Avg_Wd_end_Long],'k-o','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= MarkerSizeP;
+        avg = plot(xcondticks,[Avg_Wd_start_Long Avg_Wd_end_Long],'k-o','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= 8;
         Er  = errorbar(xcondticks,[Avg_Wd_start_Long Avg_Wd_end_Long],-([CI_Wd_start_Long CI_Wd_end_Long]),[CI_Wd_start_Long CI_Wd_end_Long]); Er.Color=[0 0 0]; Er.LineStyle = 'none';Er.LineWidth = ErLineWidth;
 
         
@@ -241,7 +156,7 @@ for nplot = 1:subplotnum
         s2  = subplot(2,2,nplot); hold on;
         
         plot(xcondticks,[Wd_start(short_inds) ; Wd_end(short_inds)]','color',color_lightgray);
-        avg = plot(xcondticks,[Avg_Wd_start_Short Avg_Wd_end_Short],'k-d','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= MarkerSizeP;
+        avg = plot(xcondticks,[Avg_Wd_start_Short Avg_Wd_end_Short],'k-d','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= 8;
         Er  = errorbar(xcondticks,[Avg_Wd_start_Short Avg_Wd_end_Short],-([CI_Wd_start_Short CI_Wd_end_Short]),[CI_Wd_start_Short CI_Wd_end_Short]); Er.Color=[0 0 0]; Er.LineStyle = 'none';Er.LineWidth = ErLineWidth;
 
     elseif nplot == 3
@@ -249,10 +164,10 @@ for nplot = 1:subplotnum
         %DIFFERENCE B/W START & END ADAPT
         subplot(2,2,nplot); hold on;
         %long
-        avg   = plot(xcondticks(1,1),Dif_Avg_Wd_Long,'k-o','MarkerFaceColor','k'); avg(1).MarkerSize= MarkerSizeP;
+        avg   = plot(xcondticks(1,1),Dif_Avg_Wd_Long,'k-o','MarkerFaceColor','k'); avg(1).MarkerSize= 8;
         Er    = errorbar(xcondticks(1,1),Dif_Avg_Wd_Long,-(Dif_CI_Wd_Long),Dif_CI_Wd_Long); Er.Color=[0 0 0]; Er.LineStyle = 'none'; Er.LineWidth = ErLineWidth;
         %short
-        avg   = plot(xcondticks(1,2),Dif_Avg_Wd_Short,'k-d','MarkerFaceColor','k');avg(1).MarkerSize= MarkerSizeP;
+        avg   = plot(xcondticks(1,2),Dif_Avg_Wd_Short,'k-d','MarkerFaceColor','k');avg(1).MarkerSize= 8;
         Er    = errorbar(xcondticks(1,2),Dif_Avg_Wd_Short,-(Dif_CI_Wd_Short),Dif_CI_Wd_Short); Er.Color=[0 0 0]; Er.LineStyle = 'none';Er.LineWidth = ErLineWidth;
         
         %line at zero
