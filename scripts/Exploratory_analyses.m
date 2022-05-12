@@ -18,7 +18,8 @@ end
 
 
 %% Calculations for Correlation
-%disparity
+
+% disparity
 Disp_Dif_Start_Pre_Long   = squeeze(nanmean(Disp(:,2,long_inds)) - nanmean(Disp(:,1,long_inds))); % start minus pre
 Disp_Dif_End_Start_Long   = squeeze(nanmean(Disp(:,3,long_inds)) - nanmean(Disp(:,2,long_inds))); % end minus start
 Disp_Dif_Post_Pre_Long    = squeeze(nanmean(Disp(:,4,long_inds)) - nanmean(Disp(:,1,long_inds))); % start minus pre
@@ -27,7 +28,7 @@ Disp_Dif_Start_Pre_Short  = squeeze(nanmean(Disp(:,2,short_inds)) - nanmean(Disp
 Disp_Dif_End_Start_Short  = squeeze(nanmean(Disp(:,3,short_inds)) - nanmean(Disp(:,2,short_inds))); % end minus start
 Disp_Dif_Post_Pre_Short   = squeeze(nanmean(Disp(:,4,short_inds)) - nanmean(Disp(:,1,short_inds))); % start minus pre
 
-%Dual cue differences for each group
+% dual cue
 Dual_Dif_Start_Pre_Long   = squeeze(nanmean(Dual(:,2,long_inds)) - nanmean(Dual(:,1,long_inds))); % start minus pre
 Dual_Dif_End_Start_Long   = squeeze(nanmean(Dual(:,3,long_inds)) - nanmean(Dual(:,2,long_inds))); % end minus start
 Dual_Dif_Post_Pre_Long    = squeeze(nanmean(Dual(:,4,long_inds)) - nanmean(Dual(:,1,long_inds))); % start minus pre
@@ -36,7 +37,7 @@ Dual_Dif_Start_Pre_Short  = squeeze(nanmean(Dual(:,2,short_inds)) - nanmean(Dual
 Dual_Dif_End_Start_Short  = squeeze(nanmean(Dual(:,3,short_inds)) - nanmean(Dual(:,2,short_inds))); % end minus start
 Dual_Dif_Post_Pre_Short   = squeeze(nanmean(Dual(:,4,short_inds)) - nanmean(Dual(:,1,short_inds))); % start minus pre
 
-%shape
+% shape
 Shape_Dif_Start_Pre_Long  = squeeze(nanmean(Shape(:,2,long_inds)) - nanmean(Shape(:,1,long_inds))); % start minus pre
 Shape_Dif_End_Start_Long  = squeeze(nanmean(Shape(:,3,long_inds)) - nanmean(Shape(:,2,long_inds))); % end minus start
 Shape_Dif_Post_Pre_Long   = squeeze(nanmean(Shape(:,4,long_inds)) - nanmean(Shape(:,1,long_inds))); % start minus pre
@@ -47,8 +48,7 @@ Shape_Dif_Post_Pre_Short  = squeeze(nanmean(Shape(:,4,short_inds)) - nanmean(Sha
 
 
 %STATS
-%Correlation between adaptation to the slant distortion from disparity
-%and the shape distortion
+%Correlation between adaptation to the slant distortion from disparity and the shape distortion
 
 display('**SLANT & DUAL CUE INITIAL DISTORTION**');
 %continuous group
@@ -134,8 +134,6 @@ display(['r = ' num2str(r(2),3),', p = ' num2str(p(2),4)]);
 display(' ');
 
 
-
-
 display('**SLANT & SHAPE ADAPTATION**');
 
 %continuous group
@@ -155,7 +153,6 @@ display(' ');
 display('both groups: Slant vs Shape Adaptation');
 display(['r = ' num2str(r(2),3),', p = ' num2str(p(2),4)]);
 display(' ');
-
 
 
 
@@ -179,8 +176,6 @@ display(' ');
 display('both groups: Slant vs Shape Aftereffect');
 display(['r = ' num2str(r(2),3),', p = ' num2str(p(2),4)]);
 display(' ');
-
-
 
 
 
@@ -258,7 +253,7 @@ S = scatter(Disp_Dif_Start_Pre_Short,Shape_Dif_Start_Pre_Short,"MarkerEdgeColor"
 xlabel('Disparity-only difference (deg)');
 ylabel('Shape Distortion height ratio difference');
 
-%Shape Vs Disp post-pre
+%Shape Vs Disp start-end
 subplot(2,3,2); hold on;
 L = scatter(Disp_Dif_End_Start_Long,Shape_Dif_End_Start_Long,"MarkerEdgeColor",[1,0,0]); %continuous
 S = scatter(Disp_Dif_End_Start_Short,Shape_Dif_End_Start_Short,"MarkerEdgeColor",[0,0,0]);
@@ -272,25 +267,25 @@ L = scatter(Disp_Dif_Post_Pre_Long,Shape_Dif_Post_Pre_Long,"MarkerEdgeColor",[1,
 S = scatter(Disp_Dif_Post_Pre_Short,Shape_Dif_Post_Pre_Short,"MarkerEdgeColor",[0,0,0]);
 
 
-% Dual cue vs Disp
-subplot(2,3,4); hold on; %initial bias
+% Dual cue vs Disp start-pre
+subplot(2,3,4); hold on;
 scatter(Disp_Dif_Start_Pre_Long,Dual_Dif_Start_Pre_Long,"MarkerEdgeColor",[1,0,0]); %continuous
 scatter(Disp_Dif_Start_Pre_Short,Dual_Dif_Start_Pre_Short,"MarkerEdgeColor",[0,0,0]);
 xlabel('Disparity-only difference (deg)');
 ylabel('Dual cue difference (deg)');
 
-subplot(2,3,5); hold on; %adaptation
+% Dual cue vs Disp start-end
+subplot(2,3,5); hold on;
 scatter(Disp_Dif_End_Start_Long,Dual_Dif_End_Start_Long,"MarkerEdgeColor",[1,0,0]); %continuous
 scatter(Disp_Dif_End_Start_Short,Dual_Dif_End_Start_Short,"MarkerEdgeColor",[0,0,0]);
 
-subplot(2,3,6); hold on; %aftereffect
+% Dual cue vs Disp post-pre
+subplot(2,3,6); hold on;
 scatter(Disp_Dif_Post_Pre_Long,Dual_Dif_Post_Pre_Long,"MarkerEdgeColor",[1,0,0]); %continuous
 scatter(Disp_Dif_Post_Pre_Short,Dual_Dif_Post_Pre_Short,"MarkerEdgeColor",[0,0,0]);
 
 
-%Plot
-%shape adaption vs shape aftereffect
-%Shape Vs Disp start-pre
+%Shape adaptation vs shape aftereffect
 figure, hold on;
 title('Shape Distortion height ratio difference');
 L = scatter(Shape_Dif_End_Start_Long,Shape_Dif_Post_Pre_Long,"MarkerEdgeColor",[1,0,0]); %continuous
@@ -304,8 +299,7 @@ legend([L S],'Continuous group','Intermittent Group');
 %Task is self timed and we don’t have a timestamp for each trial. We will have to use trial ordering instead of time.
 %note: I do not correct the texture values in this plot
 
-%average across start adapt for all subjects for each condition. Split
-%between groups
+%average across start adapt for all subjects for each condition. Split between groups
 
 % PRE
 
@@ -402,11 +396,10 @@ condstr             = {'Persp','Disp','Dual','Shape'};
 
 counter = 0;
 
-%Plot time courese of adaptation and decay
+%Plot time course of adaptation and decay
 figure,hold on;
 sgtitle('Slant percieved frontoparallel accross time (deg)');
 for m = 1:4 %each measurement session Start or Post
-    
     
     
     for cond = 1:4 %conditions Perspective, disparity, dual, shape
@@ -504,124 +497,3 @@ end
 legend([L S],'Continuous','Intermittent');
 
 hold off;
-
-
-
-
-%plotting variables - V2 of the plot above
-Measurmentstr       = {'Start','Post'};
-condstr             = {'Persp','Disp','Dual'};
-
-counter = 0;
-
-%Plot time courese of adaptation and decay
-figure,hold on;
-for m = 1:2 %each measurement session Start or Post
-    
-    for cond = 1:3 %conditions Perspective, disparity, dual, shape
-        
-        % calculate 95% CI across subjects
-        eval(['CI_Long = 1.96*(Std_',...
-            condstr{cond},'_',Measurmentstr{m},'_Trials_Long /sqrt(15));']);
-        eval(['CI_Short = 1.96*(Std_',...
-            condstr{cond},'_',Measurmentstr{m},'_Trials_Short /sqrt(15));']);
-        
-        counter = counter + 1;
-        
-        subplot(2,3,counter); hold on;
-        
-        eval(['plot(1:1:length(Persp_Post_Trials_Long),',condstr{cond},...
-            '_',Measurmentstr{m},'_Trials_Long,"-or");']);%continuous
-        
-        eval(['Er = errorbar(1:1:length(Persp_Post_Trials_Long),' condstr{cond},...
-            '_',Measurmentstr{m},'_Trials_Long,-(CI_Long),CI_Long); Er.Color=[1 0 0]; Er.LineStyle = "none";']); %error bar
-        
-        eval(['plot(1:1:length(Persp_Post_Trials_Long),',condstr{cond},...
-            '_',Measurmentstr{m},'_Trials_Short,"-dk");']); %intermittent
-        
-        eval(['Er = errorbar(1:1:length(Persp_Post_Trials_Short),' condstr{cond},...
-            '_',Measurmentstr{m},'_Trials_Short,-(CI_Short),CI_Short); Er.Color=[0 0 0]; Er.LineStyle = "none";']); %error bar
-        
-        hline = refline(0,0); hline.Color = 'k'; hline.LineStyle = '--'; %reference line
-        
-        
-        
-        %axes
-        if counter == 1
-            title('Perspective-only')
-            ylabel('Slant percieved frontoparallel (deg)');
-            
-        elseif counter == 2
-            title('Disparity-only')
-            
-        elseif counter == 3
-            title('Dual Cue');
-            
-        elseif counter == 4
-            xlabel('Trials');
-            ylabel('Slant percieved frontoparallel (deg)');
-            
-        elseif counter == 5
-            xlabel('Trials');
-        elseif counter == 6
-            xlabel('Trials');
-        end
-    end
-end
-
-hold off;
-
-
-
-
-%plotting variables - V2 Just SHAPE
-Measurmentstr       = {'Start','Post'};
-condstr             = {'Shape'};
-
-counter = 0;
-
-%Plot time courese of adaptation and decay
-figure,hold on;
-for m = 1:2 %each measurement session Start or Post
-    
-    cond = 1;
-    
-    % calculate 95% CI across subjects
-    eval(['CI_Long = 1.96*(Std_',...
-        condstr{cond},'_',Measurmentstr{m},'_Trials_Long /sqrt(15));']);
-    eval(['CI_Short = 1.96*(Std_',...
-        condstr{cond},'_',Measurmentstr{m},'_Trials_Short /sqrt(15));']);
-    counter = counter + 1;
-    
-    subplot(2,1,counter); hold on;
-    
-    
- 
-    eval(['L = plot(1:1:length(Shape_Post_Trials_Long),',condstr{cond},...
-        '_',Measurmentstr{m},'_Trials_Long,"-or");']); %continuous
-    
-    eval(['Er = errorbar(1:1:length(Shape_Post_Trials_Long),' condstr{cond},...
-        '_',Measurmentstr{m},'_Trials_Long,-(CI_Long),CI_Long); Er.Color=[1 0 0]; Er.LineStyle = "none";']); %error bar
-    
-    eval(['S = plot(1:1:length(Shape_Post_Trials_Long),',condstr{cond},...
-        '_',Measurmentstr{m},'_Trials_Short,"-dk");']); %intermittent
-    
-    eval(['Er = errorbar(1:1:length(Shape_Post_Trials_Short),' condstr{cond},...
-        '_',Measurmentstr{m},'_Trials_Short,-(CI_Short),CI_Short); Er.Color=[0 0 0]; Er.LineStyle = "none";']); %error bar
-    
-    hline = refline(0,1); hline.Color = 'k'; hline.LineStyle = '--'; %reference line
-    
-    %axes
-    if counter == 1
-        title('Shape')
-        ylabel('Height ratio right over left');
-    elseif counter == 2
-        xlabel('Trials');
-    end
-    
-end
-
-legend([L S],'Continuous','Intermittent');
-
-hold off;
-

@@ -193,6 +193,7 @@ for dif = 1:3 %Loop through the difference calculations Start vs pre, Start vs e
     
 end
 hold off;
+if make_it_tight,  clear subplot;  end
 
  % save figure as a pdf
 saveas(gcf,'../plots/fig_8_shape.pdf');

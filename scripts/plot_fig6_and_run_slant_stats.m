@@ -431,6 +431,7 @@ for dif = 1:3
     
 end
 hold off;
+if make_it_tight,  clear subplot;  end
 
 % save figure as a pdf
 saveas(gcf,'../plots/fig_6_slant_biases.pdf');

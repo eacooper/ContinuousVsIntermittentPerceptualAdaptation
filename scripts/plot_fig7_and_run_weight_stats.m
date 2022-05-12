@@ -81,13 +81,13 @@ Std_Wd_start_Short = nanstd(Wd_start(short_inds));
 Std_Wd_end_Short   = nanstd(Wd_end(short_inds));
 Dif_Std_Wd_Short   = nanstd(Wd_end(short_inds) - Wd_start(short_inds));
 
-CI_Wd_start_Long   = 1.96*Std_Wd_start_Long/sqrt(sum(~isnan(Wd_start(long_inds)))); 
-CI_Wd_end_Long     = 1.96*Std_Wd_end_Long/sqrt(sum(~isnan(Wd_start(long_inds)))); 
-Dif_CI_Wd_Long     = 1.96*Dif_Std_Wd_Long/sqrt(sum(~isnan(Wd_start(long_inds)))); 
+CI_Wd_start_Long   = 1.96*Std_Wd_start_Long/sqrt(sum(~isnan(Wd_start(long_inds))));
+CI_Wd_end_Long     = 1.96*Std_Wd_end_Long/sqrt(sum(~isnan(Wd_start(long_inds))));
+Dif_CI_Wd_Long     = 1.96*Dif_Std_Wd_Long/sqrt(sum(~isnan(Wd_start(long_inds))));
 
-CI_Wd_start_Short  = 1.96*Std_Wd_start_Short/sqrt(sum(~isnan(Wd_start(short_inds)))); 
+CI_Wd_start_Short  = 1.96*Std_Wd_start_Short/sqrt(sum(~isnan(Wd_start(short_inds))));
 CI_Wd_end_Short    = 1.96*Std_Wd_end_Short/sqrt(sum(~isnan(Wd_start(short_inds))));
-Dif_CI_Wd_Short    = 1.96*Dif_Std_Wd_Short/sqrt(sum(~isnan(Wd_start(short_inds)))); 
+Dif_CI_Wd_Short    = 1.96*Dif_Std_Wd_Short/sqrt(sum(~isnan(Wd_start(short_inds))));
 
 
 %% RUN STATS
@@ -96,8 +96,8 @@ display('**WEIGHT STATS**');
 
 %continuous - single sample t-test end-start
 [h,p,ci,stats] = ttest(Wd_Dif_End_Start_Long);
- d = Dif_Avg_Wd_Long/ Dif_Std_Wd_Long;
- 
+d = Dif_Avg_Wd_Long/ Dif_Std_Wd_Long;
+
 display('Single Sample t: Weight Difference continuous group end-start');
 display(['Mcont = ' num2str(Dif_Avg_Wd_Long,3) ' +/- ' num2str(Dif_Std_Wd_Long,3) ...
     ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
@@ -105,15 +105,15 @@ display(' ');
 
 %intermittent - single sample t-test end-start
 [h,p,ci,stats] = ttest(Wd_Dif_End_Start_Short);
- d = Dif_Avg_Wd_Short/ Dif_Std_Wd_Short;
- 
+d = Dif_Avg_Wd_Short/ Dif_Std_Wd_Short;
+
 display('Single Sample t: Weight Difference intermittent group end-start');
 display(['Minter = ' num2str(Dif_Avg_Wd_Short,3) ' +/- ' num2str(Dif_Std_Wd_Short,3) ...
     ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
 display(' ');
 
 
-%Unpaired t test for the difference scores for the comparison between 
+%Unpaired t test for the difference scores for the comparison between
 %intermittent and continuous groups
 [h,p,ci,stats] = ttest2(Wd_Dif_End_Start_Long,Wd_Dif_End_Start_Short);
 d = (Dif_Avg_Wd_Long-Dif_Avg_Wd_Short)/ std([Dif_Avg_Wd_Short;Dif_Avg_Wd_Long]);
@@ -149,7 +149,7 @@ for nplot = 1:subplotnum
         plot(xcondticks,[Wd_start(long_inds) ; Wd_end(long_inds)]','color',color_lightgray);
         avg = plot(xcondticks,[Avg_Wd_start_Long Avg_Wd_end_Long],'k-o','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= 8;
         Er  = errorbar(xcondticks,[Avg_Wd_start_Long Avg_Wd_end_Long],-([CI_Wd_start_Long CI_Wd_end_Long]),[CI_Wd_start_Long CI_Wd_end_Long]); Er.Color=[0 0 0]; Er.LineStyle = 'none';Er.LineWidth = ErLineWidth;
-
+        
         
     elseif nplot == 2
         
@@ -158,7 +158,7 @@ for nplot = 1:subplotnum
         plot(xcondticks,[Wd_start(short_inds) ; Wd_end(short_inds)]','color',color_lightgray);
         avg = plot(xcondticks,[Avg_Wd_start_Short Avg_Wd_end_Short],'k-d','MarkerFaceColor','k'); hold on; avg(1).MarkerSize= 8;
         Er  = errorbar(xcondticks,[Avg_Wd_start_Short Avg_Wd_end_Short],-([CI_Wd_start_Short CI_Wd_end_Short]),[CI_Wd_start_Short CI_Wd_end_Short]); Er.Color=[0 0 0]; Er.LineStyle = 'none';Er.LineWidth = ErLineWidth;
-
+        
     elseif nplot == 3
         
         %DIFFERENCE B/W START & END ADAPT
@@ -172,7 +172,7 @@ for nplot = 1:subplotnum
         
         %line at zero
         hline = refline(0,0); hline.Color = 'k'; hline.LineStyle = '--';
-    end 
+    end
     
     
     
@@ -196,15 +196,16 @@ for nplot = 1:subplotnum
         xtickangle(11);
         xticklabels({'Continuous','Intermittent'});
         xlim([xxmin, 1.8]);
-    end    
+    end
     
     fig = gca;
-    fig.TickLength = [0.015, 0.01]; 
+    fig.TickLength = [0.015, 0.01];
     set(gca,'box','on','FontSize',fontsize,'fontname','arial');
     
     
-end 
- hold off;
+end
+hold off;
+if make_it_tight,  clear subplot;  end
 
- % save figure as a pdf
+% save figure as a pdf
 saveas(gcf,'../plots/fig_7_weight.pdf');
