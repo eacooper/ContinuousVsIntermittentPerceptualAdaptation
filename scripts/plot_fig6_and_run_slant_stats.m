@@ -294,6 +294,63 @@ display('unpaired t: Disparity, continuous compared to intermittent post - pre')
 display(['t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
 display(' ');
 
+
+display('**SLANT ADAPTATION DUAL CUE**');
+
+%DUAL end - start
+% continuous - One sample t test end - start
+[h,p,ci,stats] = ttest(Dual_Dif_End_Start_Long);
+d = (Avg_Dual_Dif_End_Start_Long)/ Std_Dual_Dif_End_Start_Long;
+
+display('Single Sample t: Dual, continuous group end - start');
+display(['Mcont = ' num2str(Avg_Dual_Dif_End_Start_Long,3) ' +/- ' num2str(Std_Dual_Dif_End_Start_Long,3) ...
+    ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
+% intermittent - One sample t test end - start
+[h,p,ci,stats] = ttest(Dual_Dif_End_Start_Short);
+d = (Avg_Dual_Dif_End_Start_Short)/ Std_Dual_Dif_End_Start_Short;
+
+display('Single Sample t: Dual, intermittent group end - start');
+display(['Minter = ' num2str(Avg_Dual_Dif_End_Start_Short,3) ' +/- ' num2str(Std_Dual_Dif_End_Start_Short,3) ...
+    ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
+%Unpaired T test
+[h,p,ci,stats] = ttest2(Dual_Dif_End_Start_Long,Dual_Dif_End_Start_Short);
+d = (Avg_Dual_Dif_End_Start_Long - Avg_Dual_Dif_End_Start_Short) / std([Dual_Dif_End_Start_Long;Dual_Dif_End_Start_Short]);
+
+display('Single Sample t: Dual, continuous compared to intermittent end - start');
+display(['t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
+%DUAL  post - pre
+% continuous - One sample t test post - pre
+[h,p,ci,stats] = ttest(Dual_Dif_Post_Pre_Long);
+d = (Avg_Dual_Dif_Post_Pre_Long)/ Std_Dual_Dif_Post_Pre_Long;
+
+display('Single Sample t: Dual, continuous group post - pre');
+display(['Mcont = ' num2str(Avg_Dual_Dif_Post_Pre_Long,3) ' +/- ' num2str(Std_Dual_Dif_Post_Pre_Long,3) ...
+    ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
+% intermittent - One sample t test post - pre
+[h,p,ci,stats] = ttest(Dual_Dif_Post_Pre_Short);
+d = (Avg_Dual_Dif_Post_Pre_Short)/ Std_Dual_Dif_Post_Pre_Short;
+
+display('Single Sample t: Dual, intermittent group post - pre');
+display(['Minter = ' num2str(Avg_Dual_Dif_Post_Pre_Short,3) ' +/- ' num2str(Std_Dual_Dif_Post_Pre_Short,3) ...
+    ', t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
+%Unpaired T test
+[h,p,ci,stats] = ttest2(Dual_Dif_Post_Pre_Long,Dual_Dif_Post_Pre_Short);
+d = (Avg_Dual_Dif_Post_Pre_Long - Avg_Dual_Dif_Post_Pre_Short) / std([Dual_Dif_Post_Pre_Long;Dual_Dif_Post_Pre_Short]);
+
+display('unpaired t: Dual, continuous compared to intermittent post - pre');
+display(['t(' num2str(stats.df) ') = ' num2str(stats.tstat,3) ', p = ' num2str(p,3) ', d = ' num2str(d,3) ]);
+display(' ');
+
 %% PLOTTING
 
 % set up some plotting variables
